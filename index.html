@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,7 +198,7 @@
     <section class="hero">
         <h1>Rivals Script Hub</h1>
         <p>A comprehensive, high-performance feature collection tailored specifically for advanced gameplay exploration and visual customization.</p>
-        <button class="btn-primary" onclick="copyText('loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Main script framework copied!')">Get Script</button>
+        <button class="btn-primary" onclick="fallbackCopyText('loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Main script framework copied!')">Get Script</button>
     </section>
 
     <h2 class="section-title">Core Capability System</h2>
@@ -208,7 +210,7 @@
                 <h3>🎯 Lock-On Mechanics (Aimbot)</h3>
                 <p>Utilises advanced movement tracking algorithms to calculate targets smoothly. Includes field-of-view configuration limits, custom tracking smoothing, and target priority sorting filters to ensure organic motion profiles.</p>
             </div>
-            <button class="btn-embed" onclick="copyEmbed('Aimbot Module', 'Lock-On Mechanics', 'Tracking algorithms featuring field-of-view configuration bounds.')">Embed Feature</button>
+            <button class="btn-embed" onclick="copyEmbed('Aimbot')">Embed Feature</button>
         </div>
 
         <!-- Feature 2: Flying -->
@@ -217,7 +219,7 @@
                 <h3>✈️ Physics Modification (Flying)</h3>
                 <p>Directly alters client positioning parameters within the spatial engine layer. Bypasses standard movement caps to offer full 3D coordinate freedom with custom horizontal velocity values and hover systems.</p>
             </div>
-            <button class="btn-embed" onclick="copyEmbed('Flight Module', 'Physics Modification', 'Alters spatial parameters to bypass structural and coordinate limitations.')">Embed Feature</button>
+            <button class="btn-embed" onclick="copyEmbed('Flying')">Embed Feature</button>
         </div>
 
         <!-- Feature 3: Skin Changer -->
@@ -226,7 +228,7 @@
                 <h3>🎨 Local Asset Override (Skin Changer)</h3>
                 <p>Intersects client memory blocks responsible for skin loading frameworks. Instantly swaps weapon textures, structural color layouts, and character apparel profiles cleanly on your personal screen interface.</p>
             </div>
-            <button class="btn-embed" onclick="copyEmbed('Skin Customiser', 'Local Asset Override', 'Intersects client memory loops to swap item visuals locally.')">Embed Feature</button>
+            <button class="btn-embed" onclick="copyEmbed('SkinChanger')">Embed Feature</button>
         </div>
 
         <!-- Feature 4: ESP -->
@@ -235,7 +237,7 @@
                 <h3>👁️ Spatial Awareness Overlay (ESP)</h3>
                 <p>Draws real-time boundary details directly onto your view plane. Safely outlines entity hitboxes, shows health status percentages, and projects clean distance indicators through structures without dropping frames.</p>
             </div>
-            <button class="btn-embed" onclick="copyEmbed('ESP Frame', 'Spatial Awareness Overlay', 'Renders coordinate bounding vectors and metadata indicators directly over targets.')">Embed Feature</button>
+            <button class="btn-embed" onclick="copyEmbed('ESP')">Embed Feature</button>
         </div>
 
         <!-- Feature 5: Auto Win -->
@@ -244,7 +246,7 @@
                 <h3>🏆 Match Automation (Auto Win)</h3>
                 <p>Deploys macro logic loops designed to solve core match requirements instantly. It streamlines tedious loops, automatically finishes object interactions, and maximizes round outcomes effortlessly.</p>
             </div>
-            <button class="btn-embed" onclick="copyEmbed('Automation Module', 'Match Automation', 'Deploys algorithmic logic sequences to instantly close out game loops.')">Embed Feature</button>
+            <button class="btn-embed" onclick="copyEmbed('AutoWin')">Embed Feature</button>
         </div>
     </main>
 
@@ -252,13 +254,25 @@
     <footer class="footer-banner">
         <h2>Ready to upgrade your interface?</h2>
         <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 25px auto;">Get instant access to the core script loader asset framework below.</p>
-        <button class="btn-primary" onclick="copyText('_G.PremiumMode = true; loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Script loader code copied!')">Copy Script Loader</button>
+        <button class="btn-primary" onclick="fallbackCopyText('_G.PremiumMode = true; loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Script loader code copied!')">Copy Script Loader</button>
     </footer>
 
-    <!-- Script Clipboard Automation Logic -->
+    <!-- Fixed Offline Compatibility Script Logic -->
     <script>
         // Notification Display Handler
         function showToast(message) {
             const toast = document.getElementById('toast-notification');
+            toast.innerText = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
 
-
+        // Offline Fallback Copy Tool (Works directly from local files)
+        function fallbackCopyText(text, successMessage) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
