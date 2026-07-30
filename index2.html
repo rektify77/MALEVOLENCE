@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivals Script - Premium Showcase</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --bg-card: #121216;
+            --accent-purple: #8a2be2;
+            --accent-pink: #ff1493;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Hero Splash Banner */
+        .hero {
+            padding: 100px 20px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(138, 43, 226, 0.15) 0%, transparent 70%);
+            border-bottom: 1px solid #1e1e24;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.5);
+        }
+
+        /* Features Section Presentation Layout */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 80px 0 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Stylized Presentation Feature Cards */
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid #1e1e24;
+            border-radius: 12px;
+            padding: 35px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-pink));
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 15px 0;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0 0 25px 0;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        /* Interactive Embed Button */
+        .btn-embed {
+            background-color: #1e1e24;
+            color: #ffffff;
+            border: 1px solid #33333f;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+
+        .btn-embed:hover {
+            background-color: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        /* Toast Popup Notification Alert */
+        .toast {
+            position: fixed;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #1f122e, #110718);
+            border: 1px solid var(--accent-pink);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            bottom: 40px;
+        }
+
+        /* Bottom Action Layout Section */
+        .footer-banner {
+            background-color: var(--bg-card);
+            border-top: 1px solid #1e1e24;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Notification Engine Banner -->
+    <div id="toast-notification" class="toast">Copied to clipboard!</div>
+
+    <!-- Hero Showcase Section -->
+    <section class="hero">
+        <h1>Rivals Script Hub</h1>
+        <p>A comprehensive, high-performance feature collection tailored specifically for advanced gameplay exploration and visual customization.</p>
+        <button class="btn-primary" onclick="copyText('loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Main script framework copied!')">Get Script</button>
+    </section>
+
+    <h2 class="section-title">Core Capability System</h2>
+    
+    <main class="feature-grid">
+        <!-- Feature 1: Aimbot -->
+        <div class="feature-card">
+            <div>
+                <h3>🎯 Lock-On Mechanics (Aimbot)</h3>
+                <p>Utilises advanced movement tracking algorithms to calculate targets smoothly. Includes field-of-view configuration limits, custom tracking smoothing, and target priority sorting filters to ensure organic motion profiles.</p>
+            </div>
+            <button class="btn-embed" onclick="copyEmbed('Aimbot Module', 'Lock-On Mechanics', 'Tracking algorithms featuring field-of-view configuration bounds.')">Embed Feature</button>
+        </div>
+
+        <!-- Feature 2: Flying -->
+        <div class="feature-card">
+            <div>
+                <h3>✈️ Physics Modification (Flying)</h3>
+                <p>Directly alters client positioning parameters within the spatial engine layer. Bypasses standard movement caps to offer full 3D coordinate freedom with custom horizontal velocity values and hover systems.</p>
+            </div>
+            <button class="btn-embed" onclick="copyEmbed('Flight Module', 'Physics Modification', 'Alters spatial parameters to bypass structural and coordinate limitations.')">Embed Feature</button>
+        </div>
+
+        <!-- Feature 3: Skin Changer -->
+        <div class="feature-card">
+            <div>
+                <h3>🎨 Local Asset Override (Skin Changer)</h3>
+                <p>Intersects client memory blocks responsible for skin loading frameworks. Instantly swaps weapon textures, structural color layouts, and character apparel profiles cleanly on your personal screen interface.</p>
+            </div>
+            <button class="btn-embed" onclick="copyEmbed('Skin Customiser', 'Local Asset Override', 'Intersects client memory loops to swap item visuals locally.')">Embed Feature</button>
+        </div>
+
+        <!-- Feature 4: ESP -->
+        <div class="feature-card">
+            <div>
+                <h3>👁️ Spatial Awareness Overlay (ESP)</h3>
+                <p>Draws real-time boundary details directly onto your view plane. Safely outlines entity hitboxes, shows health status percentages, and projects clean distance indicators through structures without dropping frames.</p>
+            </div>
+            <button class="btn-embed" onclick="copyEmbed('ESP Frame', 'Spatial Awareness Overlay', 'Renders coordinate bounding vectors and metadata indicators directly over targets.')">Embed Feature</button>
+        </div>
+
+        <!-- Feature 5: Auto Win -->
+        <div class="feature-card">
+            <div>
+                <h3>🏆 Match Automation (Auto Win)</h3>
+                <p>Deploys macro logic loops designed to solve core match requirements instantly. It streamlines tedious loops, automatically finishes object interactions, and maximizes round outcomes effortlessly.</p>
+            </div>
+            <button class="btn-embed" onclick="copyEmbed('Automation Module', 'Match Automation', 'Deploys algorithmic logic sequences to instantly close out game loops.')">Embed Feature</button>
+        </div>
+    </main>
+
+    <!-- Bottom Action Layout Section -->
+    <footer class="footer-banner">
+        <h2>Ready to upgrade your interface?</h2>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 25px auto;">Get instant access to the core script loader asset framework below.</p>
+        <button class="btn-primary" onclick="copyText('_G.PremiumMode = true; loadstring(game:HttpGet(&quot;https://rivalshub.xyz;))()', 'Script loader code copied!')">Copy Script Loader</button>
+    </footer>
+
+    <!-- Script Clipboard Automation Logic -->
+    <script>
+        // Notification Display Handler
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+
+
